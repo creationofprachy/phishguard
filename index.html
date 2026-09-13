@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PhishGuard | Phishing URL Detection</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon">&#128737;</span>
+        <div>
+          <h1>PhishGuard</h1>
+          <p>ML-powered phishing URL detection dashboard</p>
+        </div>
+      </div>
+      <div class="model-badge" id="modelBadge">Model: loading...</div>
+    </header>
+
+    <main class="grid">
+      <section class="panel analyze-panel">
+        <h2>Analyze a URL</h2>
+        <p class="hint">Paste any URL. Analysis runs locally using only the URL text &mdash; no page content is fetched.</p>
+        <form id="analyzeForm">
+          <input
+            type="text"
+            id="urlInput"
+            placeholder="e.g. http://paypal-login-verify.secure-update.tk/confirm"
+            autocomplete="off"
+          />
+          <div class="button-row">
+            <button type="submit" id="analyzeBtn">Analyze URL</button>
+            <button type="button" id="clearBtn" class="secondary">Clear History</button>
+          </div>
+        </form>
+        <div id="errorBox" class="error-box hidden"></div>
+
+        <div id="resultCard" class="result-card hidden">
+          <div class="result-header">
+            <span id="verdictBadge" class="verdict-badge">-</span>
+            <span id="resultUrl" class="result-url"></span>
+          </div>
+
+          <div class="score-row">
+            <div class="score-block">
+              <span class="score-label">Risk Score</span>
+              <span id="riskScore" class="score-value">-</span>
+            </div>
+            <div class="score-block">
+              <span class="score-label">Model Confidence</span>
+              <span id="confidence" class="score-value">-</span>
+            </div>
+          </div>
+
+          <div class="meter">
+            <div id="meterFill" class="meter-fill"></div>
+          </div>
+
+          <h3>Why this verdict</h3>
+          <ul id="contributorsList" class="contributors-list"></ul>
+        </div>
+      </section>
+
+      <section class="panel history-panel">
+        <h2>Analysis History</h2>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th>Verdict</th>
+              <th>Risk</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <tr><td colspan="4" class="empty-row">No URLs analyzed yet.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel metrics-panel">
+        <h2>Model Performance</h2>
+        <div id="metricsGrid" class="metrics-grid">
+          <div class="metric-loading">Loading model metrics...</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>PhishGuard is a defensive research/educational tool. Always verify results with additional sources before taking action.</p>
+    </footer>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
